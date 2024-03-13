@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include "log.h"
 
-int main() {
+int main()
+{
+
+  int buffer_size1 = 5;
+  int message_size1 = 50;
+  int buffer_size2 = 10;
+  int message_size2 = 50;
+  char buffer1[buffer_size1 * message_size1];
+  char buffer2[buffer_size2 * message_size2];
   // Create a task-specific log for Task A
-  task_log_t *task_a = task_log(4, 100);
-  if (task_a == NULL) {
+  task_log_t *task_a = task_log(buffer_size1, message_size1, buffer1);
+  if (task_a == NULL)
+  {
     printf("Failed to create task log\n");
     return 1;
   }
@@ -17,8 +26,9 @@ int main() {
   send_log(task_a, "Log message 6 from Task A ");
 
   // Create a separate log for Task B
-  task_log_t *task_b_log = task_log(5, 50);
-  if (task_b_log == NULL) {
+  task_log_t *task_b_log = task_log(buffer_size2, message_size2, buffer2);
+  if (task_b_log == NULL)
+  {
     printf("Failed to create task log\n");
     return 1;
   }
@@ -40,11 +50,8 @@ int main() {
   display_logs(task_b_log);
 
   // Free the allocated memory
-  free(task_a->buffer);
   free(task_a);
-  free(task_b_log->buffer);
   free(task_b_log);
 
   return 0;
 }
-

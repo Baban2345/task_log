@@ -1,10 +1,10 @@
 #ifndef LOG_H
 #define LOG_H
-
 #include <stdlib.h>
-#include<stdio.h>
+#include <stdio.h>
 #include <string.h>
-typedef struct task_log_t {
+typedef struct task_log_t
+{
   char *buffer;
   int buffer_size;
   int message_size;
@@ -12,9 +12,7 @@ typedef struct task_log_t {
   int current_pos;
 } task_log_t;
 
-task_log_t *task_log(int buffer_size, int message_size);
+task_log_t *task_log(int buffer_size, int message_size, char *buffer);
 void send_log(task_log_t *task_log, const char *message);
 void display_logs(task_log_t *task_log);
-
 #endif /* LOG_H */
-
